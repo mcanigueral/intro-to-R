@@ -44,18 +44,6 @@ acn_sessions_tb <- acn_sessions %>%
   select(spaceID, everything())
 
 
-acn_sessions_summary <- acn_sessions_tb %>%
-  mutate(
-    date = date(connectionDateTime),
-    connection_hours = as.numeric(disconnectionDateTime - connectionDateTime, units='hours')
-  ) %>%
-  group_by(date) %>%
-  summarise(
-    n = n(),
-    max_kWh = max(Energy),
-    avg_conn = mean(connection_hours)
-  )
-
 
 
 # Another data set --------------------------------------------------------
