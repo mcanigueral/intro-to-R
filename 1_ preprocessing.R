@@ -56,7 +56,7 @@ unique(sessions_models$Profile)
 
 
 # Data set preparation
-# - timezone conversions (readr save everything in UTC)
+# - timezone conversions (`readr` saves everything in UTC)
 # - Date times rounded to hours
 # - Connection datetime variable
 # - Number of charging hours

@@ -7,7 +7,7 @@ sessions_summary
 
 sessions_summary %>%
   ggplot(aes(x = date, y = n, color = Profile)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   # geom_point(aes(y = max_kWh)) +
   labs(x = "", y = "Number of sessions", title = "Test with {ggplot2}") +
   scale_x_datetime(date_labels = "%d %b", date_breaks = "3 days") +
@@ -66,7 +66,7 @@ random_plot <-  random_data %>%
 random_plot
 
 random_plot +
-  stat_smooth(method = "lm", formule = y ~ poly(x, 1), fullrange = T) +
+  stat_smooth(method = "lm", formula = y ~ poly(x, 1), fullrange = T) +
   scale_x_continuous(limits = c(0, 20))
 
 # Regression model
@@ -83,7 +83,24 @@ predict(
 
 
 
-# Dynamic pots
+# Interactive plots -------------------------------------------------------
+
+# Plotly
+library(plotly)
+
+USPersonalExpenditure <- data.frame("Categorie"=rownames(USPersonalExpenditure), USPersonalExpenditure)
+data <- USPersonalExpenditure[,c('Categorie', 'X1960')]
+
+fig <- plot_ly(data, labels = ~Categorie, values = ~X1960, type = 'pie')
+fig <- fig %>% layout(title = 'United States Personal Expenditures by Categories in 1960',
+                      xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                      yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+fig
+
+
+
+# Dygraphs
 df_to_ts <- function(df) {
   xts::xts(df[-1], order.by = df[[1]]) # Last item of a function is returned
 }

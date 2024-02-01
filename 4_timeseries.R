@@ -141,5 +141,3 @@ fit %>% forecast() %>% autoplot(recent_production_dcmp)
 
 
 
-
-

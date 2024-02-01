@@ -27,14 +27,16 @@ map2_dbl(random_data$a, random_data$b, ~ simple_func(.x, .y))
 
 map2_df(random_data$a, random_data$b, ~ simple_func(.x, .y, df=T))
 
-pmap_dfr(random_data, ~ simple_func(..1, ..2, ..3, df=T))
+pmap(random_data, ~ simple_func(..1, ..2, ..3, df=T)) %>%
+  list_rbind()
 
-pmap_dfc(random_data, ~ simple_func(..1, ..2, ..3, df=T))
+pmap(random_data, ~ simple_func(..1, ..2, ..3, df=T)) %>%
+  list_cbind()
 
 
 
 
-# Functions to get demand -------------------------------------------------
+# Functions with iteration -------------------------------------------------
 
 get_interval_demand <- function(interval, sessions_flex, interval_mins, by = c("Profile", "Session")) {
   print(paste(interval, " -------------------------------------------------------- "))
